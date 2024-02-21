@@ -8,20 +8,26 @@ In the following sections, I will briefly explain the main ideas and present the
 # Semantic Segmentation
 Semantic segmentation is a computer vision task that involves classifying each pixel in an image into a specific category or class. This task goes beyond object detection, which only identifies the presence of objects in an image without specifying their exact boundaries. In semantic segmentation, the goal is to label each pixel with a class label (e.g., person, car, road, sky) to provide a detailed understanding of the image's content. This technique is widely used in various fields such as autonomous driving, medical imaging, and satellite imagery analysis. By segmenting an image semantically, computers can better understand the visual world and make more informed decisions based on the pixel-wise annotations.
 
+<div align="center">
+
 | <img src="images/ss.jpeg" width="400" height="200"> | 
 |:--:| 
 | *Semantic Segmentation* |
 *source : [Nanonets](https://www.google.com/url?sa=i&url=https%3A%2F%2Fnanonets.com%2Fblog%2Fsemantic-image-segmentation-2020%2F&psig=AOvVaw2nq_S2KglaqVXqMC6QOHWL&ust=1708576854268000&source=images&cd=vfe&opi=89978449&ved=0CBMQjRxqFwoTCOiUgvbOu4QDFQAAAAAdAAAAABAE)*
+</div>
 
 # Fully Convolutional Network
 Convolutional Neural Networks (CNNs) traditionally excel in tasks like image classification by leveraging convolutional and pooling layers to extract features and make predictions. When it comes to semantic segmentation, Fully Convolutional Networks (FCNs) adapt the CNN architecture by removing the fully connected layers. FCNs maintain spatial information throughout the network, allowing input images of varying sizes to produce output segmentation maps of the same dimensions.
 
 In the encoding stage, FCNs extract high-level features through convolutional and pooling layers, gradually reducing spatial dimensions. The decoding stage involves upsampling the spatial dimensions back to the original image size using transposed convolutions or upsampling layers. Through decoding, FCNs combine low-level features from encoding with high-level features, often through skip connections, to enhance segmentation accuracy. This process enables FCNs to perform pixel-wise predictions for semantic segmentation effectively.
 
+<div align="center">
+
 | <img src="https://d1m75rqqgidzqn.cloudfront.net/wp-data/2020/10/19185819/image-43.png" width="300" height="100"> | 
 |:--:| 
 | *FCN 8* |
 *source : [GreatLearning](https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.mygreatlearning.com%2Fblog%2Ffcn-fully-convolutional-network-semantic-segmentation%2F&psig=AOvVaw0H42f57eMcbHEWUbggWhoF&ust=1708579247928000&source=images&cd=vfe&opi=89978449&ved=0CBMQjRxqFwoTCNDesO7Xu4QDFQAAAAAdAAAAABAE)*
+</div>
 
 # U-Net
 U-Net is an architecture designed for biomedical image segmentation tasks but widely used in various image segmentation applications due to its effectiveness. U-Net improves upon the basic FCN architecture by introducing skip connections that directly connect encoding layers to corresponding decoding layers at the same spatial resolution. These skip connections aid in preserving fine-grained details during upsampling and help avoid information loss in the decoding process.
@@ -30,10 +36,13 @@ By incorporating skip connections that directly link feature maps from encoding 
 
 The symmetrical design of the U-Net architecture ensures that the lengths of the downsampling and upsampling paths match, promoting a balance between feature extraction and resolution refinement. This symmetry facilitates the seamless integration of skip connections, allowing extracted features from different scales to be effectively combined and propagated across the network for more robust segmentation performance.
 
+<div align="center">
+
 | <img src="images/u.png" width="400" height="300"> | 
 |:--:| 
 | *U-Net* |
 *source : [Medium](https://www.google.com/url?sa=i&url=https%3A%2F%2Flukmanaj.medium.com%2Fu-net-architecture-revolutionizing-computer-vision-through-innovative-image-segmentation-e1e2155c38b1&psig=AOvVaw3_sP1q-PTTwuApImsbYL7f&ust=1708579770169000&source=images&cd=vfe&opi=89978449&ved=0CBMQjRxqFwoTCODJ2uXZu4QDFQAAAAAdAAAAABAQ)*
+</div>
 
 # V-Net
 This architecture closely follows the principles of U-Net by incorporating two symmetric contracting and expanding paths. However, V-Net distinguishes itself by adopting a fully-convolutional structure, exclusively employing convolution operations while eliminating pooling layers.
@@ -46,10 +55,14 @@ By incorporating residual connections, V-Net enhances the flow of gradients duri
 
 The elimination of pooling layers in V-Net reduces memory overhead and helps maintain spatial information throughout the network. This absence of pooling layers also enhances the model's ability to extract robust features and preserves finer details in the segmentation process.
 
-| <img src="images/v.png" width="400" height="300"> | 
-|:--:| 
+<div align="center">
+  <img src="images/v.png" width="400" height="300">
+
+
 | *V-Net* |
+|:--:|
 *source : [Towards Data Science](https://www.google.com/url?sa=i&url=https%3A%2F%2Ftowardsdatascience.com%2Freview-v-net-volumetric-convolution-biomedical-image-segmentation-aa15dbaea974&psig=AOvVaw3B_lGotPgHdbwdb9tYMOya&ust=1708580996516000&source=images&cd=vfe&opi=89978449&ved=0CBMQjRxqFwoTCKj1mK3eu4QDFQAAAAAdAAAAABAE)*
+</div>
 
 # Results
 Firstly, I would like to mention that I have implemented the V-Net for 2D images and incorporated innovative ideas from the V-Net to enhance the architecture of the U-Net. Hence, there is potential for enhancing the architecture further.
@@ -60,9 +73,12 @@ The use of linear activation (or no activation) in the 1x1 convolution prevents 
 
 Both models performed well on the dataset. Increasing the number of iterations appeared to significantly reduce the loss. To ensure a fair comparison, I aimed to achieve a similar validation loss for both models. The V-Net demonstrated superior accuracy in capturing spatial patterns. For example, in a test image, the V-Net excelled in outlining the boundaries of a digit 1.
 
+<div align="center">
+
 | <img src="images/vnet_test0.jpg" width="400" height="400"> | <img src="images/test0.jpg" width="400" height="400"> |
 |:--:|:--:|
 | *V-Net output* | *U-Net output* |
+</div>
 
 | class | V-Net IoU | U-Net IoU | V-Net Dice score | U-Net Dice score|
 | ----- | ---- | ---- | ----- | ---- |
